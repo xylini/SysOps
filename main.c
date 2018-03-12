@@ -2,6 +2,7 @@
 // Created by Jakub Pajor on 11.03.2018.
 //
 #include "DynCharray.h"
+#include "StatCharray.h"
 #include <stdio.h>
 
 int main() {
@@ -28,6 +29,7 @@ int main() {
     create_char_block(charray,6,a6);
     create_char_block(charray,7,a7);
     create_char_block(charray,8,a8);
+    create_char_block(charray,9,a9);
     create_char_block(charray,9,a9);
 
     delete_char_block(charray,3);

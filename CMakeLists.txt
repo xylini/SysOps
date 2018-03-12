@@ -3,4 +3,4 @@ project(SysOps C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(SysOps main.c DynCharray.c DynCharray.h)
+add_executable(SysOps main.c DynCharray.c DynCharray.h StatCharray.c StatCharray.h)
