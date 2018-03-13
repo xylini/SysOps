@@ -1,46 +1,45 @@
 //
 // Created by Jakub Pajor on 11.03.2018.
 //
-#include "DynCharray.h"
-#include "StatCharray.h"
+#include "charray.h"
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>
+
+char* generateRandomString(int maxSize){
+    if (maxSize < 1) return NULL;
+    char *base = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    size_t baseLength = strlen(base);
+    char *newString = (char *) malloc((maxSize) * sizeof(char));
+    int newStringLength = maxSize - (rand() % maxSize);
+
+    for (int i = 0; i < newStringLength; ++i) {
+        newString[i] = base[rand()%baseLength];
+    }
+    for (int i = newStringLength; i < maxSize + 1; i++){
+        newString[i] = '\0';
+    }
+    return newString;
+}
 
 int main() {
-    char * a0 = "000000000000000";
-    char * a1 = "111111111111111";
-    char * a2 = "222222222222222";
-    char * a3 = "333333333333333";
-    char * a4 = "444444444444444";
-    char * a5 = "555555555555555";
-    char * a6 = "666666666666666";
-    char * a7 = "777777777777777";
-    char * a8 = "888888888888888";
-    char * a9 = "999999999999999";
+    srand(time(NULL));
+    int is_static = 1;
+    int elements = 120;
+    Charray * charray = create_char_array(NULL,elements,is_static);
 
+    for(int i = 0; i < 20; i++){
+        create_char_block(charray,i,generateRandomString(10),is_static);
+    }
 
-    Charray * charray = NULL;
-    charray = create_char_array(charray,10);
-    create_char_block(charray,0,a0);
-    create_char_block(charray,1,a1);
-    create_char_block(charray,2,a2);
-    create_char_block(charray,3,a3);
-    create_char_block(charray,4,a4);
-    create_char_block(charray,5,a5);
-    create_char_block(charray,6,a6);
-    create_char_block(charray,7,a7);
-    create_char_block(charray,8,a8);
-    create_char_block(charray,9,a9);
-    create_char_block(charray,9,a9);
+    delete_char_block(charray,3,is_static);
 
-    delete_char_block(charray,3);
+    change_char_block(charray,70,"zmiana bloku",is_static);
 
-    change_char_block(charray,2,a9);
-
-
-    char * ax = "33333333333333";
-    int best_index = closest_bsum_index(charray,sum_char_block(ax));
-
-    printf("%d\n",best_index);
+    //charray = resize_char_array(charray,2000,is_static);
+    //create_char_block(charray,19,a9,is_static);
+    //delete_char_array(charray,is_static);
     printCharray(charray);
 
 
